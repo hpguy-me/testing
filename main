@@ -1,0 +1,8 @@
+from scipy.signal import butter, filtfilt, iirnotch
+
+def apply_notch_filter(data, fs=500, cutoff=50, q=30):
+    """حذف نویز ۵۰ هرتز برق شهر"""
+    nyquist = 0.5 * fs
+    freq = cutoff / nyquist
+    b, a = iirnotch(freq, q)
+    return filtfilt(b, a, data)
